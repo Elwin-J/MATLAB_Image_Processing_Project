@@ -1,4 +1,5 @@
-fullFileName = 'Project.png';
+clear
+fullFileName = 'image.jpg';
 fontSize = 13;
 rgbImage = imread(fullFileName);
 % Get the dimensions of the image.  numberOfColorBands should be = 3.
@@ -84,16 +85,17 @@ for k = 1 : length(boundary2)
     % Find closest point, min distance.
     [minDistance(k), indexOfMin] = min(allDistances);
 	if minDistance(k) < overallMinDistance
-		x1 = boundary1x(indexOfMin);
-		y1 = boundary1y(indexOfMin);
-		x2 = boundary2x;
-		y2 = boundary2y;
+		x1(k) = boundary1x(indexOfMin);
+		y1(k) = boundary1y(indexOfMin);
+		x2(k) = boundary2x;
+		y2(k) = boundary2y;
 	end
 end
 % Find the overall min distance
-minDistance = min(minDistance);
+[minDistance,index] = min(minDistance);
+
 % Report to command window.
 minDistance
 
 % Draw a line between point 1 and 2
-line([x1, x2], [y1, y2], 'Color', 'y', 'LineWidth', 3);
+line([x1(index), x2(index)], [y1(index), y2(index)], 'Color', 'y', 'LineWidth', 3);
